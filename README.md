@@ -1,1 +1,1 @@
-# This repo is called: {{repo_name}}
+# Main instructions for this template.
