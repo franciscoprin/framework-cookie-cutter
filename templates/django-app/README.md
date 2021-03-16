@@ -1,1 +1,2 @@
-# Django app: {{repo_name}}
+# Django app: ${{REPO_NAME}}
+# ${{REPO_NAME}} is so cool.
