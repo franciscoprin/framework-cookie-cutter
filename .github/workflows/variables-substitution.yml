@@ -28,4 +28,4 @@ jobs:
           rm -fr ./templates
       - name: Replace variables.
         run: |
-          sed -e "s/\${{REPO_NAME}}/$REPO_NAME/" README.md
+          sed -e "s/\$\{\{REPO_NAME\}\}/$REPO_NAME/" README.md
