@@ -28,4 +28,5 @@ jobs:
           rm -fr ./templates
       - name: Replace variables.
         run: |
+          echo $REPO_NAME
           sed -e "s/\$\{\{REPO_NAME\}\}/$REPO_NAME/" README.md
