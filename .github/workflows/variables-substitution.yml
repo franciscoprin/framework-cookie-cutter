@@ -28,7 +28,7 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           echo ${{ github.event.repository.name }}
-          sed -e "s/\$\{\{REPO_NAME\}\}/${{ github.event.repository.name }}/" README.md
+          sed -e "s|REPO_NAME|${{ github.event.repository.name }}" README.md
       - name: Cleanup.
         run: |
           rm -fr ./templates
