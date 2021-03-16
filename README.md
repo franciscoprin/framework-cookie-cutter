@@ -1,1 +1,1 @@
-# my_template
+# This repo is called: {{repo_name}}
