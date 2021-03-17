@@ -23,17 +23,20 @@ jobs:
       # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
       - name: Debug.
         run:
-          echo ${{ github.event }}
-          echo ${{ github.event }}
-          echo ${{ github.event }}
-          echo ${{ github.event }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
 
       - name: Selecting app.
         env:
           SELECTED_APP: fastapi-app
         run: |
           mkdir ./selected-app
-          mv ./templates/$SELECTED_APP ./selected-app
+          mv ./templates/$SELECTED_APP/* ./selected-app
 
       - name: Replace variables.
         env:
