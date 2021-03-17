@@ -22,9 +22,6 @@ jobs:
 
       # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
       - name: Debug.
-        env:
-          REPO_NAME: ${{ github.event.repository.name }}
-          SELECTED_APP: fastapi-app
         run:
           echo ${{ github.event.payload }}
           echo ${{ github.event.repository.name }}
