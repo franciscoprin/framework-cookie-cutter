@@ -33,7 +33,7 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           echo ${{ github.event.repository.name }}
-          sed 's / REPO_NAME / $REPO_NAME' README.md
+          sed "s/REPO_NAME/$REPO_NAME/g" README.md
 
       - name: Cleanup.
         run: |
