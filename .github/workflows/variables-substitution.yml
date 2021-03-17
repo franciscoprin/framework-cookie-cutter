@@ -29,13 +29,13 @@ jobs:
           echo $SELECTED_APP
           echo $SELECTED_APP
           echo $SELECTED_APP
-          echo ${{ github.event.payload.description }}
-          echo ${{ github.event.payload.description }}
-          echo ${{ github.event.payload.description }}
-          echo ${{ github.event.payload.description }}
-          echo ${{ github.event.payload.description }}
-          echo ${{ github.event.payload.description }}
-          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.repository.payload.description }}
+          echo ${{ github.event.repository.payload.description }}
+          echo ${{ github.event.repository.payload.description }}
+          echo ${{ github.event.repository.payload.description }}
+          echo ${{ github.event.repository.payload.description }}
+          echo ${{ github.event.repository.payload.description }}
+          echo ${{ github.event.repository.payload.description }}
           echo $SELECTED_APP
 
       - name: Selecting app.
@@ -48,7 +48,7 @@ jobs:
       - name: Replace variables.
         env:
           REPO_NAME: ${{ github.event.repository.name }}
-          REPO_DESCRIPTION: ${{ github.event.payload.description }}
+          REPO_DESCRIPTION: ${{ github.event.repository.payload.description }}
         run: |
           find ./ -type f -exec sed -i "s/<REPO_NAME>/$REPO_NAME/g" {} +
           find ./ -type f -exec sed -i "s/<REPO_DESCRIPTION>/$REPO_DESCRIPTION/g" {} +
