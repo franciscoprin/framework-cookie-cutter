@@ -22,21 +22,10 @@ jobs:
 
       # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
       - name: Debug.
-        env:
-          SELECTED_APP: fastapi-app
         run:
-          echo $SELECTED_APP
-          echo $SELECTED_APP
-          echo $SELECTED_APP
-          echo $SELECTED_APP
           echo ${{ github.event.repository.payload.description }}
-          echo ${{ github.event.repository.payload.description }}
-          echo ${{ github.event.repository.payload.description }}
-          echo ${{ github.event.repository.payload.description }}
-          echo ${{ github.event.repository.payload.description }}
-          echo ${{ github.event.repository.payload.description }}
-          echo ${{ github.event.repository.payload.description }}
-          echo $SELECTED_APP
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.repository.description }}
 
       - name: Selecting app.
         env:
