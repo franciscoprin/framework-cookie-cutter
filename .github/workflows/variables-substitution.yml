@@ -20,33 +20,38 @@ jobs:
       - name: Cloning repo.
         uses: actions/checkout@v2
 
-
-      - name: Selecting app.
-        env:
-          REPO_DESCRIPTION: ${{ github.event.repository.description }}
-        run: |
-          echo "REPO_DESCRIPTION: $REPO_DESCRIPTION"
-          export SELECTED_FRAMEWORK_NAME=$(echo "react|django|phoenix|fastapi" | grep -E -i -o -w "$REPO_DESCRIPTION")
-          export SELECTED_APP=$([[ -z "$SELECTED_FRAMEWORK_NAME" ]] && echo "django" || echo "$SELECTED_FRAMEWORK_NAME")
-          echo "SELECTED_FRAMEWORK_NAME: $SELECTED_FRAMEWORK_NAME"
-          echo "SELECTED_APP: $SELECTED_APP"
-          mkdir ./selected-app
-          mv ./templates/$SELECTED_APP-app/* ./selected-app
-
-      # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
-      - name: Replace variables.
+      - name: Set up repo.
         env:
           REPO_NAME: ${{ github.event.repository.name }}
           REPO_DESCRIPTION: ${{ github.event.repository.description }}
-        run: |
-          find ./ -type f -exec sed -i "s/<REPO_NAME>/$REPO_NAME/g" {} +
-          find ./ -type f -exec sed -i "s/<REPO_DESCRIPTION>/$REPO_DESCRIPTION/g" {} +
+        run: ./setup.sh
 
-      - name: Cleanup.
-        run: |
-          find ./ -maxdepth 1 -regextype posix-extended  -not -regex "./.git|./|./selected-app" -exec rm -fr {} +
-          mv ./selected-app/* ./
-          rm -fr ./selected-app
+      # - name: Selecting app.
+      #   env:
+      #     REPO_DESCRIPTION: ${{ github.event.repository.description }}
+      #   run: |
+      #     echo "REPO_DESCRIPTION: $REPO_DESCRIPTION"
+      #     export SELECTED_FRAMEWORK_NAME=$(echo "react|django|phoenix|fastapi" | grep -E -i -o -w "$REPO_DESCRIPTION")
+      #     export SELECTED_APP=$([[ -z "$SELECTED_FRAMEWORK_NAME" ]] && echo "django" || echo "$SELECTED_FRAMEWORK_NAME")
+      #     echo "SELECTED_FRAMEWORK_NAME: $SELECTED_FRAMEWORK_NAME"
+      #     echo "SELECTED_APP: $SELECTED_APP"
+      #     mkdir ./selected-app
+      #     mv ./templates/$SELECTED_APP-app/* ./selected-app
+
+      # # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
+      # - name: Replace variables.
+      #   env:
+      #     REPO_NAME: ${{ github.event.repository.name }}
+      #     REPO_DESCRIPTION: ${{ github.event.repository.description }}
+      #   run: |
+      #     find ./ -type f -exec sed -i "s/<REPO_NAME>/$REPO_NAME/g" {} +
+      #     find ./ -type f -exec sed -i "s/<REPO_DESCRIPTION>/$REPO_DESCRIPTION/g" {} +
+
+      # - name: Cleanup.
+      #   run: |
+      #     find ./ -maxdepth 1 -regextype posix-extended  -not -regex "./.git|./|./selected-app" -exec rm -fr {} +
+      #     mv ./selected-app/* ./
+      #     rm -fr ./selected-app
 
       - name: Git Commit/Push Changes
         uses: actions-x/commit@v1
