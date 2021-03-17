@@ -16,21 +16,30 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Cloning repo.
+        uses: actions/checkout@v2
+
       - name: Setup app.
         env:
           REPO_NAME: ${{ github.event.repository.name }}
-          SELECTED_APP: "fastapi-app"
+          SELECTED_APP: fastapi-app
         run: |
           find ./ -maxdepth 1 -type f -exec rm -f {} +
           mv ./templates/$SELECTED_APP/* ./
+
       - name: Replace variables.
         env:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           echo ${{ github.event.repository.name }}
           sed -e "s|REPO_NAME|$REPO_NAME" README.md
+
       - name: Cleanup.
         run: |
           rm -fr ./templates
           rm -fr ./.github
+
+      - name: Git Commit/Push Changes
+        uses: actions-x/commit@v1
 
