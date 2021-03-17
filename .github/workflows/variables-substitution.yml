@@ -33,7 +33,7 @@ jobs:
           SELECTED_APP: fastapi-app
         run: |
           mkdir ./selected-app
-          mv ./templates/$SELECTED_APP/* ./selected-app
+          mv ./templates/$SELECTED_APP ./selected-app
 
       - name: Replace variables.
         env:
@@ -44,7 +44,7 @@ jobs:
       - name: Cleanup.
         run: |
           find ./ -maxdepth 1 -regextype posix-extended  -not -regex "./.git|./|./selected-app" -exec rm -fr {} +
-          mv ./selected-app ./
+          mv ./selected-app/* ./
           rm -fr ./selected-app
 
       - name: Git Commit/Push Changes
