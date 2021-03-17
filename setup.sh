@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # In case that `REPO DESCRIPTION` doesn't contain one of the cases insensitive choices.
 # Choices are: react, django, phoenix, and fastapi.
