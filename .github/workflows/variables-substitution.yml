@@ -21,19 +21,26 @@ jobs:
         uses: actions/checkout@v2
 
       # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
-      - name: Set env variables.
+      - name: Debug.
         env:
           REPO_NAME: ${{ github.event.repository.name }}
           SELECTED_APP: fastapi-app
         run:
           echo ${{ github.event.payload }}
+          echo ${{ github.event.repository.name }}
+          echo ${{ github.event.repository }}
+          echo ${{ github.event }}
 
       - name: Setup app.
+        env:
+          SELECTED_APP: fastapi-app
         run: |
           find ./ -maxdepth 1 -type f -exec rm -f {} +
           mv ./templates/$SELECTED_APP/* ./
 
       - name: Replace variables.
+        env:
+          REPO_NAME: ${{ github.event.repository.name }}
         run: |
           find ./ -type f -exec sed "s/REPO_NAME/$REPO_NAME/g" {} +
 
