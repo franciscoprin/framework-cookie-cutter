@@ -1,3 +1,4 @@
-# FastAPI app: REPO_NAME
+# FastAPI app: <REPO_NAME>
 
-# REPO_NAME is so cool.
+# <REPO_NAME> is so cool.
+# Repo description: <REPO_DESCRIPTION>.
