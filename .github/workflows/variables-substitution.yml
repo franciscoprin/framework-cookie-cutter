@@ -27,6 +27,9 @@ jobs:
           SELECTED_FRAMEWORK_NAME: $(echo "react|django|phoenix|fastapi" | grep -E -i -o -w "$REPO_DESCRIPTION")
           SELECTED_APP: $([[ -z $SELECTED_FRAMEWORK_NAME ]] && echo $SELECTED_FRAMEWORK_NAME || echo "django")
         run: |
+          echo "REPO_DESCRIPTION: $REPO_DESCRIPTION"
+          echo "SELECTED_FRAMEWORK_NAME: $SELECTED_FRAMEWORK_NAME"
+          echo "SELECTED_APP: $SELECTED_APP"
           mkdir ./selected-app
           mv ./templates/$SELECTED_APP-app/* ./selected-app
 
