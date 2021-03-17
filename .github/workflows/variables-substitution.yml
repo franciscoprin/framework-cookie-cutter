@@ -23,10 +23,10 @@ jobs:
       # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
       - name: Debug.
         run:
-          echo ${{ github.event.payload }}
-          echo ${{ github.event.repository.name }}
-          echo ${{ github.event.repository }}
-          echo ${{ github.event }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
+          echo ${{ github.event.payload.description }}
 
       - name: Setup app.
         env:
@@ -39,7 +39,7 @@ jobs:
         env:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
-          find ./ -type f -exec sed "s/REPO_NAME/$REPO_NAME/g" {} +
+          find ./templates -type f -exec sed -i "s/REPO_NAME/$REPO_NAME/g" {} +
 
       - name: Cleanup.
         run: |
