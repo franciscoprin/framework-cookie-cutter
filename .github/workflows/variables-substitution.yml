@@ -24,10 +24,10 @@ jobs:
       - name: Selecting app.
         env:
           REPO_DESCRIPTION: ${{ github.event.repository.description }}
-          SELECTED_FRAMEWORK_NAME: $(echo "react|django|phoenix|fastapi" | grep -E -i -o -w "${{ REPO_DESCRIPTION }}")
-          SELECTED_APP: $([[ -z ${{ SELECTED_FRAMEWORK_NAME }} ]] && echo ${{ SELECTED_FRAMEWORK_NAME }} || echo "django")
         run: |
           echo "REPO_DESCRIPTION: $REPO_DESCRIPTION"
+          export SELECTED_FRAMEWORK_NAME=$(echo "react|django|phoenix|fastapi" | grep -E -i -o -w "$REPO_DESCRIPTION")
+          export SELECTED_APP=$([[ -z $SELECTED_FRAMEWORK_NAME ]] && echo $SELECTED_FRAMEWORK_NAME || echo "django")
           echo "SELECTED_FRAMEWORK_NAME: $SELECTED_FRAMEWORK_NAME"
           echo "SELECTED_APP: $SELECTED_APP"
           mkdir ./selected-app
