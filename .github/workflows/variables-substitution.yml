@@ -12,7 +12,8 @@ jobs:
   setup-app:
     if: github.ref == 'refs/heads/main' && github.event.repository.name != 'cookie-cutter'
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    # runners: https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+    runs-on: ubuntu-20.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
